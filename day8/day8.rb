@@ -48,25 +48,25 @@ directions = []
     nop_and_jmp = []
     directions.each {|direction| nop_and_jmp.push(direction[0]) if direction[1] == 'nop'|| direction[1] == 'jmp'}
 
-    nop_and_jmp.each do |j|
+    nop_and_jmp.each do |i|
         acc = 0
-        i = 0
+        pos = 0
         visited = Set.new
         new_directions = Marshal.load(Marshal.dump(directions))                 # WAY TO DEEP COPY?
 
-        new_directions[j][1] == 'jmp' ? new_directions[j][1] = 'nop' : new_directions[j][1] = 'jmp'
+        new_directions[i][1] == 'jmp' ? new_directions[i][1] = 'nop' : new_directions[i][1] = 'jmp'
 
-        while !visited.include?(i)
+        while !visited.include?(pos)
             idx, action, amount = new_directions[i]
-            visited.add(i)
+            visited.add(pos)
 
             if action == "nop"
-                i += 1
+                pos += 1
             elsif action == "acc"
                 acc += amount
-                i += 1
+                pos += 1
             elsif action == "jmp"
-                i += amount
+                pos += amount
             elsif action == nil                 # HAVE EXITED directions
                 p acc
                 break
