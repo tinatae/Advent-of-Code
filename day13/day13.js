@@ -23,13 +23,13 @@ function fastestBus(data) {
   return bestRide(waitTimes)
 }
 
-function keepDividing(copied, route) {
+function keepDividing(timeStamp, route) {
   counter = 0
-  while (copied > route) {
-    copied -= route
+  while (timeStamp > route) {
+    timeStamp -= route
     counter += 1
   }
-  return [counter, copied]
+  return [counter, timeStamp]
 }
 
 function bestRide(hash) {

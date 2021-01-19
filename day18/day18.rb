@@ -12,7 +12,7 @@
 
 input = File.readlines('18.txt').map {|str| str.chomp}
 
-class Integer                                                       # CHANGE RULES. WHICH IS AMAZING
+class Integer                                                       # CHANGE RULES
   def -(operator)
     self * operator
   end
@@ -31,7 +31,7 @@ p input.map {|line| eval(line.gsub('*', '-'))}.sum                  # RETURNS 50
 p input.map {|line| eval(line.gsub('*', '-').gsub('+', '/'))}.sum   # RETURNS 535809575344339
 ------------------------------------------------------------------------------------------------------
 
-# INTERESTING SOLUTION ONLINE
+# INTERESTING SOLUTION
 
 # class Integer
 #   alias_method :add, :+
