@@ -1,5 +1,4 @@
-inputs =
-"5-10 b: bhbjlkbbbbbbb
+5-10 b: bhbjlkbbbbbbb
 3-4 j: hjvj
 8-9 p: pmljtsttp
 3-4 t: hvtttqhdjmmnbqwbgfs
@@ -998,44 +997,4 @@ inputs =
 4-6 f: fffmfff
 13-16 m: zfmcnzxfvmcmqmhcctv
 1-8 n: nnnnnnnm
-8-9 v: vvvvvvvvvg"
-
-def part_one(inputs)                                        # RETURN COUNT OF VALID STRINGS WHERE # OF CHAR IN STRING IS IN RANGE
-    arr = inputs.split("\n").map {|spec| spec}
-
-    valid_count = 0
-
-    arr.each do |ele|
-        range, letter, string = ele.split(" ")                                  # ARRAY DESTRUCTURE
-        count = 0
-
-        string.each_char {|char| count += 1 if char == letter[0]}               # letter[0] BC HAS A ':' FOLLOWING LETTER
-        
-        num_range = range.split("-").map {|num| num.to_i}                       # RETURNS [min, max] PAIR
-        valid_count += 1 if count >= num_range[0] && count <= num_range[-1]
-    end
-
-    valid_count
-end
-
-
-def part_two(inputs)                            # RETURN COUNT OF VALID STRINGS WHERE INDEXED CHAR IS EITHER RANGE[0] OR RANGE[1] BUT NOT BOTH
-    arr = inputs.split("\n").map {|spec| spec}  # ALSO, THERE IS NO 0 INDEX
-    valid_count = 0
-
-    arr.each do |ele|
-        range, letter, string = ele.split(" ")
-
-        idx1, idx2 = range.split("-").map {|num| num.to_i}
-    
-        if string[idx1-1] == letter[0] && string[idx2-1] == letter[0]
-            valid_count
-        elsif string[idx1-1] == letter[0] || string[idx2-1] == letter[0]
-            valid_count += 1
-        end    
-    end
-    valid_count
-end
-
-# p part_one(inputs)          # 439
-# p part_two(inputs)          # 584
+8-9 v: vvvvvvvvvg
