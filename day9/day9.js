@@ -1,9 +1,6 @@
 let fs = require("fs");
 
-const input = fs
-  .readFileSync("09.txt", "utf8")
-  .split(/\n+/)
-  .map((num) => parseInt(num));
+const input = fs.readFileSync("9.txt", "utf8").split(/\n+/).map((num) => parseInt(num));
 
 // Encryption starts by transmitting preamble of 25 numbers. After that, each number should be the sum of any two of the 25 immediately previous numbers.
 // The two summed numbers will have different values, and there might be more than one such pair.

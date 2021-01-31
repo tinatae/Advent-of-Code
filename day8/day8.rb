@@ -16,7 +16,7 @@ directions = []
 
 # FIND accumulator val BEFORE IT GOES INTO INFINITE LOOP
 
-    File.readlines('moves.txt').each_with_index do |line, idx|
+    File.readlines('8.txt').each_with_index do |line, idx|
         direction, amount = line.split(' ')
         directions.push([idx, direction, amount.to_i])
     end
@@ -45,19 +45,24 @@ directions = []
 # PART TWO: SWAPPING ONLY ONE 'nop' FOR 'jmp' OR 'jmp' FOR 'nop' WHAT IS ACCUMULATOR WHEN EXIT THE GAME?
     # POSITION NEEDS TO EXCEED THOSE FOUND IN directions
 
+def exit_with_changed(directions)
+    nop_and_jmp = directions.select {|direction| direction[1] == 'nop'|| direction[1] == 'jmp'}.map {|subarr| subarr[0]}
+
     nop_and_jmp = []
     directions.each {|direction| nop_and_jmp.push(direction[0]) if direction[1] == 'nop'|| direction[1] == 'jmp'}
 
-    nop_and_jmp.each do |i|
+    nop_and_jmp.each do |j|
         acc = 0
         pos = 0
         visited = Set.new
-        new_directions = Marshal.load(Marshal.dump(directions))                 # WAY TO DEEP COPY?
 
-        new_directions[i][1] == 'jmp' ? new_directions[i][1] = 'nop' : new_directions[i][1] = 'jmp'
+        new_directions = Marshal.load(Marshal.dump(directions))     # WAY TO DEEP COPY?
+
+        new_directions[j][1] == 'jmp' ? new_directions[j][1] = 'nop' : new_directions[j][1] = 'jmp'
+
 
         while !visited.include?(pos)
-            idx, action, amount = new_directions[i]
+            idx, action, amount = new_directions[pos]
             visited.add(pos)
 
             if action == "nop"
@@ -67,9 +72,14 @@ directions = []
                 pos += 1
             elsif action == "jmp"
                 pos += amount
-            elsif action == nil                 # HAVE EXITED directions
-                p acc
+            elsif action == nil
+                return acc
                 break
             end
         end
     end
+end
+
+
+# p get_accumulator(directions)     # 1521
+# p exit_with_changed(directions)   # 1016
