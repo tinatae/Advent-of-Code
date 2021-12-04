@@ -40,6 +40,96 @@ console.log(multiplyGammaEpsilon(input))
 // if 0 and 1 equal, keep 1 
 // CO2 scrubber bit criteria: find least common. if equal keep 0
 
+function multiplyOxygenCO2(input) {
+    let tree = new BinaryTree(0, 0)
+  
+    for (let binary of input) {
+        let curr = tree
+        for (let char of binary) {
+            if (char === '0') {
+                if (!curr.left) curr.left = new BinaryTree(0, 0)
+                curr.zeros++
+                curr = curr.left
+            } else {
+                if (!curr.right) curr.right = new BinaryTree(0, 0)
+                curr.ones++
+                curr = curr.right
+            }
+        }
+    }
+  
+    const length = input[0].length
+  
+    let oBinaries = []
+    let cBinaries = []
+  
+    let curr = tree
+    let count = input.length
+  
+    while (oBinaries.length < length) {
+        if (!curr.right) {
+            oBinaries.push(0)
+            curr = curr.left
+            continue
+        } else if (!curr.left) {
+            oBinaries.push(1)
+            curr = curr.right
+            continue
+        }
+  
+        if (curr.ones >= curr.zeros) {
+            oBinaries.push(1)
+            count -= curr.zeros
+            curr = curr.right
+        } else {
+            oBinaries.push(0)
+            count -= curr.ones
+            curr = curr.left
+        }
+    }
+  
+    curr = tree
+    count = input.length
+  
+    while (cBinaries.length < length) {
+  
+        if (!curr.right) {
+            cBinaries.push(0)
+            curr = curr.left
+            continue
+        } else if (!curr.left) {
+            cBinaries.push(1)
+            curr = curr.right
+            continue
+        }
+  
+        if (curr.zeros <= curr.ones) {
+            cBinaries.push(0)
+            count -= curr.ones
+            curr = curr.left
+        } else {
+            cBinaries.push(1)
+            count -= curr.zeros
+            curr = curr.right
+        } 
+    }
+  
+    const oxygen = parseInt(oBinaries.join(""), 2); 
+    const cO2 = parseInt(cBinaries.join(""), 2); 
+  
+    return oxygen * cO2;
+}
+  
+class BinaryTree {
+    constructor(zeros, ones) {
+        this.zeros = zeros
+        this.ones = ones
+        this.left = null
+        this.right = null
+    }
+}
+
+//---------------------------------------------------
 const countChar = (binaries, idx) => { 
     let ones = 0 
   
@@ -48,7 +138,7 @@ const countChar = (binaries, idx) => {
     } 
     return ones >= binaries.length - ones ? '1' : '0'
 }; 
-  
+
 function multiplyOxygenCO2(input) {
     const bitCount = input[0].length
 
@@ -65,8 +155,8 @@ function multiplyOxygenCO2(input) {
         cBinaries = cBinaries.filter((binary) => binary[i] !== majority); 
     } 
 
-    const oxygen = parseInt(oBinaries[0], 2); 
-    const cO2 = parseInt(cBinaries[0], 2); 
+    const oxygen = parseInt(oBinaries, 2); 
+    const cO2 = parseInt(cBinaries, 2); 
 
     return oxygen * cO2;
 }
