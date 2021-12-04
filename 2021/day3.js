@@ -64,7 +64,6 @@ function multiplyOxygenCO2(input) {
     let cBinaries = []
   
     let curr = tree
-    let count = input.length
   
     while (oBinaries.length < length) {
         if (!curr.right) {
@@ -79,20 +78,16 @@ function multiplyOxygenCO2(input) {
   
         if (curr.ones >= curr.zeros) {
             oBinaries.push(1)
-            count -= curr.zeros
             curr = curr.right
         } else {
             oBinaries.push(0)
-            count -= curr.ones
             curr = curr.left
         }
     }
   
     curr = tree
-    count = input.length
   
     while (cBinaries.length < length) {
-  
         if (!curr.right) {
             cBinaries.push(0)
             curr = curr.left
@@ -105,11 +100,9 @@ function multiplyOxygenCO2(input) {
   
         if (curr.zeros <= curr.ones) {
             cBinaries.push(0)
-            count -= curr.ones
             curr = curr.left
         } else {
             cBinaries.push(1)
-            count -= curr.zeros
             curr = curr.right
         } 
     }
