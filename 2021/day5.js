@@ -9,9 +9,9 @@ const fs = require('fs')
 const input = fs.readFileSync('day5.txt', 'utf8')
                 .split(/\n/)
                 .map(entry => {
-                    let splitPos = entry.split(' -> ')
-                    let pos1 = splitPos[0].split(',').map(coord => parseInt(coord))
-                    let pos2 = splitPos[1].split(',').map(coord => parseInt(coord))
+                    const splitPos = entry.split(' -> ')
+                    const pos1 = splitPos[0].split(',').map(coord => parseInt(coord))
+                    const pos2 = splitPos[1].split(',').map(coord => parseInt(coord))
                     return [pos1, pos2]
                 })
 
