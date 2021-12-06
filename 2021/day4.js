@@ -101,18 +101,18 @@ class Board {
 
     if (playToWin) {
       if (this.checkComplete(this.rows, num)) 
-        return this.sumNumAndMultiplyRemaining(this.board, lastNumber)
+        return this.multiplyLastNumAndRemainingSum(this.board, lastNumber)
       if (this.checkComplete(this.cols, num)) 
-        return this.sumNumAndMultiplyRemaining(this.rotated,lastNumber)
+        return this.multiplyLastNumAndRemainingSum(this.rotated,lastNumber)
     } else {
       if (this.checkComplete(this.rows, num) || this.checkComplete(this.cols, num))  return true
     }
     return false
   }
 
-  checkComplete(set, num) {
-    for (let i = 0; i < set.length; i++) {
-      const currLine = set[i]
+  checkComplete(lineSet, num) {
+    for (let i = 0; i < lineSet.length; i++) {
+      const currLine = lineSet[i]
 
       if (currLine.has(num)) {
         currLine.delete(num)
@@ -122,7 +122,7 @@ class Board {
     return false
   }
 
-  sumNumAndMultiplyRemaining(board, num) {
+  multiplyLastNumAndRemainingSum(board, num) {
     let sum = 0
 
     for (let i = 0; i < board.length; i++) {
@@ -138,7 +138,11 @@ class Board {
 }
 
 const game = new Game(input)
+
+// part 1
 console.log(game.playGame(true))
 // 41503
+
+// part 2
 console.log(game.playGame())
 // 3178
