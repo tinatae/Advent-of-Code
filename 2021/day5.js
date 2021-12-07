@@ -15,23 +15,14 @@ const input = fs.readFileSync('day5.txt', 'utf8')
                     return [pos1, pos2]
                 })
 
-const isDiagonal = (pos1, pos2) => {
-  const [x1, y1] = pos1
-  const [x2, y2] = pos2
-  return Math.abs(y2-y1) === Math.abs(x2-x1)
-}
+const isDiagonal = (pos1, pos2) => Math.abs(pos2[1]-pos1[1]) === Math.abs(pos2[0]-pos1[0])
 
 const filterData = (input, includeDiagonals) => {
   const meetCondition = []
 
   input.forEach(entry => {
-    if (includeDiagonals) {
-      if (entry[0][0] === entry[1][0] || entry[0][1] === entry[1][1] || isDiagonal(entry[0], entry[1]))
-        meetCondition.push(entry)  
-    } else {
-      if (entry[0][0] === entry[1][0] || entry[0][1] === entry[1][1])
-        meetCondition.push(entry)   
-    }
+    if (entry[0][0] === entry[1][0] || entry[0][1] === entry[1][1] 
+      || includeDiagonals && isDiagonal(entry[0], entry[1])) meetCondition.push(entry)    
   })
   return meetCondition
 }
@@ -44,8 +35,7 @@ function findAtLeastTwoOverlapping(input, includeDiagonals=false) {
   data.forEach(entry => {
     const [[x1, y1], [x2, y2]] = entry
 
-    let xSmall = Math.min(x1, x2), xLarge = Math.max(x1, x2), 
-        ySmall = Math.min(y1, y2), yLarge = Math.max(y1, y2)
+    let xSmall = Math.min(x1, x2), xLarge = Math.max(x1, x2), ySmall = Math.min(y1, y2), yLarge = Math.max(y1, y2)
 
     if (isDiagonal([x1, y1], [x2, y2])) {
       if ((x1 === xSmall && y1 === ySmall) || (x2 === xSmall && y2 === ySmall)) {     // SE to NW. both increasing    

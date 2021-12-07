@@ -139,10 +139,8 @@ class Board {
 
 const game = new Game(input)
 
-// part 1
 console.log(game.playGame(true))
 // 41503
 
-// part 2
 console.log(game.playGame())
 // 3178
