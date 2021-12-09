@@ -15,7 +15,7 @@ const input = fs.readFileSync('day5.txt', 'utf8')
                     return [pos1, pos2]
                 })
 
-const isDiagonal = (pos1, pos2) => Math.abs(pos2[1]-pos1[1]) === Math.abs(pos2[0]-pos1[0])
+const isDiagonal = (pos1, pos2) => Math.abs(pos2[1] - pos1[1]) === Math.abs(pos2[0] - pos1[0])
 
 const filterData = (input, includeDiagonals) => {
   const meetCondition = []

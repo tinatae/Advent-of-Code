@@ -14,7 +14,10 @@ function alignCrabSubs(input, expensiveFuel) {
   if (!expensiveFuel) {
     const median = input[Math.floor((input.length-1)/2)]
 
-    return input.reduce((acc, currVal) => acc += Math.abs(currVal - median), 0)
+    return input.reduce((acc, currVal) => {
+      acc += Math.abs(currVal - median)
+    }, 0)
+
   } else {
     const lowVal = input[0], highVal = input[input.length-1]
 
@@ -23,7 +26,10 @@ function alignCrabSubs(input, expensiveFuel) {
     let bestFuel = Infinity
 
     for (let startVal = lowVal; startVal < highVal; startVal++) {
-      const comp = input.reduce((acc, currVal) => acc + memo[Math.abs(startVal - currVal)], 0)
+
+      const comp = input.reduce((acc, currVal) => {
+        acc + memo[Math.abs(startVal - currVal)]
+      }, 0)
 
       if (bestFuel <= comp) return bestFuel
       bestFuel = comp
