@@ -35,7 +35,7 @@ const input = fs.readFileSync('day8.txt', 'utf8')
 function sumFourDigitOutputs(input) {
   let workingInput = findUnique(input)
 
-  console.log(sumUnique(workingInput))                // 525
+  console.log(sumUnique(workingInput))                // part1: 525
 
   findThreeAndSix(workingInput)
   findFiveAndTwo(workingInput)
@@ -68,8 +68,6 @@ function decodedSum(input) {
   })
   return sum
 }
-
-// pt2: 1083859
 
 const setMap = (key, num, map) => {
   map.set(key, num)
@@ -188,4 +186,6 @@ function sumUnique(input) {
   return sum
 }
 
+// part2:
 console.log(sumFourDigitOutputs(input))
+// 1083859
