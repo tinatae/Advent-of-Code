@@ -15,39 +15,32 @@
 const fs = require('fs')
 const input = fs.readFileSync('day10.txt', 'utf8')
                 .split(/\n/)
-                .map(line => line.split(''))
 
 const Pairs = { ')':'(', ']':'[', '}':'{', '>':'<' }
 const SyntaxPoints = { ')': 3, ']': 57, '}': 1197, '>': 25137 }
 
 function sumIncorrectSyntax(input) {
-  let stack = []
+  const stack = []
   let sum = 0
 
   for (let i = 0; i < input.length; i++) {
-    let fillEmpty = false
-    for (let j = 0; j < input[i].length; j++) {
-
-      if (fillEmpty) {
-        input[i][j] = ''
-        continue
-      }
-
-      const char = input[i][j]
+    for (let char of input[i]) {
 
       if (Pairs[char]) {
         if (stack[stack.length-1] === Pairs[char]) {
           stack.pop()
         } else {
           sum += SyntaxPoints[char]
-          fillEmpty = true
+          input[i] = false
+          break
         } 
       } else {
         stack.push(char)
       }
     }
   }
-  const incompletes = input.filter(line => line[line.length-1] !== '')
+
+  const incompletes = input.filter(line => !!line)
   return completeIncompletes(incompletes)
 
   // return sum                                 // part1: 343863
@@ -56,8 +49,8 @@ function sumIncorrectSyntax(input) {
 const AutoCompletePoints = { '(': 1, '[': 2, '{': 3, '<': 4 }
 
 function completeIncompletes(input) {
-  let stack = []
-  let sums = []
+  const stack = []
+  const sums = []
 
   for (const line of input) {
     let sum = 0
@@ -75,7 +68,7 @@ function completeIncompletes(input) {
     }
     sums.push(sum)
   }
-  
+
   sums.sort((a, b) => a - b)
   return sums[Math.floor(sums.length/2)]
 }
