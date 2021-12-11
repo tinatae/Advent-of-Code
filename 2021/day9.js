@@ -18,7 +18,7 @@ const Directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
 const makeKey = (x, y) => `${x}-${y}`
 
-function sumRiskLevels(input) {
+function multiplyThreeLargestBasins(input) {
   // let sumLowPoints = 0                                       // modified for pt2
   let seen = new Set()
   let basins = []
@@ -80,7 +80,7 @@ function sumRiskLevels(input) {
        }
     }
   }
-  
+
   // return sumLowPoints                                          // part 1: 554
 
   basins.sort((a, b) => b - a)
@@ -92,5 +92,5 @@ function sumRiskLevels(input) {
 }
 
 // part2:
-console.log(sumRiskLevels(input))
+console.log(multiplyThreeLargestBasins(input))
 // 1017792
