@@ -6,6 +6,10 @@
 // and find most and least common elements in result. 
 // return # of most common - # of least common
 
+const fs = require('fs')
+const input = fs.readFileSync('day14.txt', 'utf8')
+                .split(/\n+/)
+
 function polymerizeElements(input, times) {
   let template = input.shift()
   const rules = input.map(ele => ele.split(' -> '))
