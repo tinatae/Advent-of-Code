@@ -1,10 +1,9 @@
 // chiton-lined cave
-// don't bump into them.
 // given grid where # at each idx is risk level val. cannot move diagonally. 
 // part1: find lowest total sum path from top left to bottom right minus starting idx val
 
 // part2: cave is 5x larger in both dimensions & each subsequent grid is += 1 for each val
-// (x gets += 1 going right, y get += 1 going down)
+// (y gets += 1 going right, x get += 1 going down)
 // if val > 9, wrap back to 1
 // find lowest total path again.
 
@@ -23,7 +22,7 @@ function minRiskPath(input, multiplier=1) {
   const width = input[0].length
 
   const counter = Array(totalHeight).fill(0).map(_ => Array(totalWidth).fill(Infinity))
-  const pq = new PQ((a, b) => a[1] > b[1])
+  const pq = new PriorityQueue((a, b) => a[1] > b[1])
 
   pq.insert([[0, 0], 0])
 
@@ -46,7 +45,7 @@ function minRiskPath(input, multiplier=1) {
   }
 }
 
-class PQ {
+class PriorityQueue {
   constructor(compFunction) {
     this.heap = [];
     this.compFunction = compFunction;
