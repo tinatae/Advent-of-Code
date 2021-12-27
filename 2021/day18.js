@@ -39,7 +39,7 @@ const input = fs.readFileSync('day18.txt', 'utf8')
 
 const concat = (arr1, arr2) => ["[", ...arr1, ...arr2, "]"]
 
-function sumSnailNumbers(input) {
+function sumSnailfishNumbers(input) {
   let sum = ''
 
   for (let i = 1; i < input.length; i++) {
@@ -116,7 +116,7 @@ function calculateMagnitude(arr) {
   return arr[0]
 }
 
-console.log(sumSnailNumbers(input))
+console.log(sumSnailfishNumbers(input))
 // 3756
 
 // part2: what is largest magnitude from adding only two snailfish nums
